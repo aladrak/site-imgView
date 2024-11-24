@@ -2,7 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const imageElement = document.getElementById('image');
     const nextButton = document.getElementById('nextButton');
     const prevButton = document.getElementById('prevButton');
+    const imageCounter = document.getElementById('imageCounter');
     let currentIndex = 1;
+    let totalImages = 0;
 
     // Функция для проверки существования изображения
     function imageExists(url) {
@@ -23,20 +25,26 @@ document.addEventListener('DOMContentLoaded', () => {
         return index - 1;
     }
 
-    let totalImages = 0;
+    // Функция для обновления счетчика изображений
+    function updateImageCounter() {
+        imageCounter.textContent = `${currentIndex}/${totalImages}`;
+    }
 
     // Определяем количество изображений при загрузке страницы
     getTotalImages().then(count => {
         totalImages = count;
+        updateImageCounter();
     });
 
     nextButton.addEventListener('click', async () => {
         currentIndex = (currentIndex % totalImages) + 1;
         imageElement.src = `images/image${currentIndex}.jpg`;
+        updateImageCounter();
     });
 
     prevButton.addEventListener('click', async () => {
         currentIndex = (currentIndex - 2 + totalImages) % totalImages + 1;
         imageElement.src = `images/image${currentIndex}.jpg`;
+        updateImageCounter();
     });
 });
