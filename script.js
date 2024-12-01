@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Функция для определения количества изображений
     async function getTotalImages() {
         let index = 1;
-        while (await imageExists(`images/image${index}.jpg`)) {
+        while (await imageExists(`images/image${index}.png`)) {
             index++;
         }
         return index - 1;
@@ -38,13 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     nextButton.addEventListener('click', async () => {
         currentIndex = (currentIndex % totalImages) + 1;
-        imageElement.src = `images/image${currentIndex}.jpg`;
+        imageElement.src = `images/image${currentIndex}.png`;
         updateImageCounter();
     });
 
     prevButton.addEventListener('click', async () => {
         currentIndex = (currentIndex - 2 + totalImages) % totalImages + 1;
-        imageElement.src = `images/image${currentIndex}.jpg`;
+        imageElement.src = `images/image${currentIndex}.png`;
         updateImageCounter();
     });
 });
